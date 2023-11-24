@@ -117,12 +117,15 @@ const registrar = ({ onCambioClick }) => {
               value={citaSeleccionado}
               onChange={(event) => setCitaSeleccionado(event.target.value)}
             >
-              <option value="">Selecciona la cita</option>
-              {citas.map((cita) => (
-                <option key={cita._id} value={cita._id}>
-                  {`${cita.paciente_id.nombre} ${cita.paciente_id.apellido} ${format(new Date(cita.fecha), 'dd/MM/yyyy hh:mm a')}`}
-                </option>
-              ))}
+          {Array.isArray(citas) && citas.length > 0 ? (
+                citas.map((cita) => (
+                  <option key={cita._id} value={cita._id}>
+                    {`${cita.paciente_id.nombre} ${cita.paciente_id.apellido} ${format(new Date(cita.fecha), 'dd/MM/yyyy hh:mm a')}`}
+                  </option>
+                ))
+              ) : (
+                <option value="">No hay citas disponibles</option>
+              )}
             </select>
           </div>
         </div>
